@@ -3,10 +3,10 @@ name: CI Pipeline   # Name of the workflow (appears in GitHub Actions tab)
 on:                 # Defines when this workflow should run
   push:             # Runs whenever code is pushed
     branches:
-      - main        # Only on the "main" branch
+      - master        # Only on the "main" branch
   pull_request:     # Runs on pull requests targeting main branch
     branches:
-      - main
+      - master
 
 jobs:               # A workflow is made of one or more jobs
   build:            # Name of the job
