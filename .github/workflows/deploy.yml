@@ -47,7 +47,7 @@ jobs:               # A workflow is made of one or more jobs
       
       -  name: Deploy Application
          run: |
-            ssh -i ~/.ssh/id_rsa ${{secrets.EC2_USER}}@${{secrets.EC2_HOST}} << 'EOF'
+            ssh ${{secrets.EC2_USER}}@${{secrets.EC2_HOST}} << 'EOF'
               cd ~/nodejs-githubaction-project
               git pull origin master
               npm install
