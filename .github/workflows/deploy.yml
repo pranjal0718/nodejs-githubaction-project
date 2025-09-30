@@ -29,15 +29,15 @@ jobs:               # A workflow is made of one or more jobs
 
       - name: Build project   # Step 5: Build application
         run: npm run build
+
       - name: Prepare release artifact
         run: npm ci --production && tar -czf release.tar.gz build node_modules package.json
+        
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: release
           path: release.tar.gz
-
-
 
   deploy: 
     name: Deploy to EC2 
@@ -59,7 +59,7 @@ jobs:               # A workflow is made of one or more jobs
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
-       - name: Upload artifact to server and deploy
+      - name: Upload artifact to server and deploy
         run: |
           scp ./artifact/release.tar.gz ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/tmp/release.tar.gz
           ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
@@ -68,4 +68,3 @@ jobs:               # A workflow is made of one or more jobs
             pm2 restart ~/deploy/releases/build/src/index.js
             rm /tmp/release.tar.gz
           EOF
-
