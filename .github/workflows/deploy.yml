@@ -10,7 +10,7 @@ on:                 # Defines when this workflow should run
 
 jobs:               # A workflow is made of one or more jobs
   build:            # Name of the job
-    runs-on: ubuntu-latest   # The environment where job will run (GitHub-hosted runner)
+    runs-on: self-hosted   # The environment where job will run (GitHub-hosted runner)
 
     steps:          # A job has multiple steps that run in order
       - name: Checkout code   # Step 1: Get repository code
